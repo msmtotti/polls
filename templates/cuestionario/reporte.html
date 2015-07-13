@@ -1,0 +1,70 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<script>
+    $(document).ready(function() {
+      $("#base").submit(function (e){
+            if ($("#strproyecto").val() == ""){
+                $("#lbl_strcuestionario").html("Campo requerido")
+                e.preventDefault();
+            }
+      })
+    });
+</script>
+    <div class="container">
+
+      
+<center>
+
+    <div class="hero-unit">
+        <h1>Obtener Base</h1>
+        <h3> {{ message }} </h3>
+      </div>
+      
+      <div class="row">
+        <div class="span2">
+          &nbsp;
+        </div>
+        <div class="span8">
+
+
+            <form name="base" id="base" method="POST"> {% csrf_token %}
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            Proyecto:
+                        </th>
+                        <td>
+                    <select name="strproyecto" name="strproyecto" id="strproyecto">
+                        <option value=''> Seleccione </option>
+                        {% for i in objProyectos %}
+                            <option value='{{ i.id }}'> {{ i.id }} - {{ i.nombre }} </option>
+                        {% endfor %}
+                    </select>
+                        </td>
+                    <td>
+                                <label id="lbl_strcuestionario"> </label>
+                            </td>
+                        </tr>
+                    </bodyt>
+                </table>
+
+            <button type="submit" class="btn btn-primary">
+              <i class=" icon-download icon-white"></i> Descargar
+            </button>
+
+            </form>
+
+       </div>
+        
+
+      
+
+      </center>
+
+    </div> <!-- /container -->
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<script>
+    $(document).ready(function() {
+      $("#simulador").submit(function (e){
+            if ($("#strcuestionario").val() == ""){
+                $("#lbl_strcuestionario").html("Campo requerido")
+                e.preventDefault();
+            }
+      })
+    });
+</script>
+
+    <div class="container">
+     
+<center>
+
+    <div class="hero-unit">
+        <h1>Simular Cuestionario</h1>
+      </div>
+      
+      <div class="row">
+        <div class="span2">
+          &nbsp;
+        </div>
+        <div class="span8">
+
+
+            <form name="simulador" id="simulador" method="POST"> {% csrf_token %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Cuestionario:
+                            </th>
+                            <td>
+                                <select name="strcuestionario" id='strcuestionario'>
+                                <option value=''> Seleccione </option>
+                                {% for i in objCuestionario %}
+                                    <option value='{{ i.id }}'>{{ i.id }} - {{ i.nombre }} </option>
+                                {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <label id="lbl_strcuestionario"> </label>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+    
+                    
+            <button type="submit" class="btn btn-primary">
+              <i class=" icon-ok icon-white"></i> Ir
+            </button>
+
+            </form>
+       </div>
+        
+
+      
+
+      </center>
+
+    </div> <!-- /container -->
+
+{% endblock %}

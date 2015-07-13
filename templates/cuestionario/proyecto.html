@@ -1,0 +1,92 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<script>
+    $(document).ready(function() {
+        function replaceAll( text, busca, reemplaza ){
+            while (text.toString().indexOf(busca) != -1)
+                text = text.toString().replace(busca,reemplaza);
+            return text;
+        }
+
+      $("#strProyecto").submit(function (e){
+            valor = replaceAll($("#name_proy").val(), " ", "" );
+            if (valor == ""){
+                $("#lbl_proy").html("Campo requerido")
+                e.preventDefault();
+            }
+      })
+
+      $('#example').popover("toggle")
+
+    });
+</script>
+    <div class="container">
+
+      
+<center>
+
+    <div class="hero-unit">
+        <h1>Crear Proyecto</h1>
+      </div>
+      
+      <div class="row">
+        <div class="span3">
+          &nbsp;
+        </div>
+        <div class="span3">
+
+
+            <form name="strProyecto" id="strProyecto" action=""  method="POST"> {% csrf_token %}
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" id="name_proy" name="name_proy" autocomplete="Off" placeholder="Nombre del proyecto" id="name_proy" />
+                        </td>
+                        <td>
+                            <label id="lbl_proy"> </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="strcuestionario">
+                                {% for i in objCuestionario %}
+                                    <option value='{{ i.id }}'>{{ i.id }} - {{ i.nombre }} </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-primary">
+                            <i class=" icon-ok icon-white"></i> Ir
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            </form>
+        </div>
+        <div class="span3">
+        {% if liga %}
+              <form name="liga" id="liga" action="{{ liga }} "method="POST"> {% csrf_token %}
+              <button type="submit" id="example" class="btn btn-success" data-content="El proyecto tiene el numero: {{ id_pro }}" data-original-title="Proyecto creado correctamente"> 
+                <i class=" icon-ok icon-white"></i> Empezar
+              </button>
+              <form>
+            {% endif %}
+       </div>
+        
+
+      
+
+      </center>
+
+    </div> <!-- /container -->
+
+{% endblock %}

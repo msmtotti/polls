@@ -1,0 +1,39 @@
+
+{% extends "base.html" %} 
+
+{% block content %}
+    <div class="container">
+
+      
+<center>
+
+    
+        <h3>Proyecto:  {{ nomProyecto }} </h3>
+        <h3>Cuestionario: {{ nomCuestionario }} </h3>
+      
+      
+      <div class="row">
+        <div class="span2">
+          &nbsp;
+        </div>
+        <div class="span8">
+          
+           <form name="form_script" id="form_script" action="/djpoll/{{ next_group }}/" method="POST"> {% csrf_token %}
+           {{ html|safe }}
+
+            <button type="submit" class="btn btn-primary">
+              <i class=" icon-share-alt icon-white"></i> Siguiente
+            </button>
+
+           
+         {{ hiddens|safe }}   
+
+               
+        </form>
+       </div>
+         
+
+      </center>
+
+    </div> <!-- /container -->
+{% endblock %}

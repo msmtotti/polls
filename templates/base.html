@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+
+<head> 
+    <title> Encuestas </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <link href="media/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="media/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="media/js/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="media/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="media/js/js.js"></script>
+
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/inicio/"> Encuestas </a>
+          {% if user.is_authenticated %}
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="/djpoll/subirArchivo">Subir Cuestionario</a></li>
+              <li><a href="/djpoll/proyecto/1">Crear Proyecto</a></li>
+              <li><a href="/djpoll/reportes/1">Base</a></li>
+              <li><a href="/djpoll/simular/1">Simulador</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ user }}  <i class="icon-user icon-white">  </i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/logout/">Salir</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+          </div>
+          {% else %}
+
+           <div class="nav-collapse">
+            <ul class="nav">
+              
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Login<i class="icon-user icon-white">  </i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login/">Iniciar Sesion</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+          </div>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+
+
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+
+
+</html>

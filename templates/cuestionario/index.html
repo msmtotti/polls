@@ -1,27 +1,13 @@
-<html>
 
-<head> 
-    
+{% extends "base.html" %} 
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="media/css/styles.css" type="text/css" media="screen" />
-    <script type="text/javascript" src="media/js/jquery-1.7.2.min.js"></script>
+{% block content %}
+<center>
+<div class="container">
+    <div class="hero-unit">
+        <h1> Bienvenido </h1>
+  </div>
+</div>
+</center>
+{% endblock %}
 
-
-    <script type="text/javascript" src="media/js/js.js"></script>
-
-</head>
-
-<body>
-    <form name="form_script" id="form_script" action="/djpoll/{{ next_group }}/" method="POST"> {% csrf_token %}
-
-    {{ html|safe }}
-
-    <input type="submit" name="botton" value="Siguiente"> 
-
-    {{ hiddens|safe }}
-    </form>
-</body>
-
-
-</html>

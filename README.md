@@ -1,4 +1,0 @@
-polls
-=====
-
-Polls

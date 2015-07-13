@@ -1,0 +1,53 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+    <div class="container">
+
+      
+<center>
+
+    <div class="hero-unit">
+        <h1>Subir Cuestionario</h1>
+      </div>
+      
+      <div class="row">
+        <div class="span2">
+          &nbsp;
+        </div>
+        <div class="span8">
+
+
+        <form name="form_script" id="form_script" action="/djpoll/subirArchivo"  enctype="multipart/form-data" method="POST"> {% csrf_token %}
+
+                
+        <input type="text" name="name_files" autocomplete="Off" placeholder="Nombre del cuestionario" id="name_files" class="required" />
+        <br/>
+        <input type="file" name="file_files" id="file_files" class="required" /> <br/> <br/>
+
+            <button type="submit" class="btn btn-primary">
+              <i class=" icon-upload icon-white"></i> Subir
+            </button>
+        </form>
+
+        {% if error_r == "Correcto" %}
+            <form name="form_script" id="form_script" action="/djpoll/{{ sumulador }}/"method="POST"> {% csrf_token %}
+                <input type="hidden" name="simulador_files" value="True">
+            <button type="submit" class="btn btn-small btn-info">
+              <i class=" icon-ok icon-white"></i> Probar
+            </button>
+            <form>
+        {% else %}
+          {{ error }}
+        {% endif %}
+
+
+       </div>
+        
+
+      
+
+      </center>
+
+    </div> <!-- /container -->
+{% endblock %}

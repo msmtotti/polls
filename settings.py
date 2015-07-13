@@ -7,21 +7,31 @@ PROJECT_NAME = os.path.dirname(__file__).split('/')[-1]
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__)).replace('\\','/')
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+     ('Miguel Soltero', 'figo10mexico@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'poll',                      # Or path to database file if using sqlite3.
-        'USER': 'poll',                      # Not used with sqlite3.
-        'PASSWORD': 'poll',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+HEROKU = False
+
+if HEROKU == False:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'poll',                      # Or path to database file if using sqlite3.
+            'USER': 'poll',                      # Not used with sqlite3.
+            'PASSWORD': 'poll',                  # Not used with sqlite3.
+            'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+        }
     }
-}
+
+else:
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgres://gxucaqbrvevmky:rZaormZ_Op07MD2TokXIORuSzu@ec2-23-21-85-233.compute-1.amazonaws.com:5432/dmbf4636ujgm5')
+        }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -78,7 +88,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'polls.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -95,7 +105,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'polls.djpoll',
+    'djpoll',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'

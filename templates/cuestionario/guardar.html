@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+
+{% block content %}
+    <div class="container">
+
+      
+<center>
+
+    <div class="hero-unit">
+        <h1> {{ mensaje }} </h1>
+      </div>
+      
+      <div class="row">
+        <div class="span2">
+          &nbsp;
+        </div>
+        <div class="span8">
+
+
+            <form name="test" id="test" method="POST" action='{{ liga }}'> {% csrf_token %}
+            
+            {{ hidden|safe }}
+
+            <button type="submit" class="btn btn-primary">
+              <i class=" icon-download icon-white"></i> {{ name }}
+            </button>
+
+            </form>
+
+       </div>
+        
+      </center>
+
+    </div> <!-- /container -->
+
+{% endblock %}

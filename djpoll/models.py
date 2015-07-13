@@ -26,7 +26,7 @@ class Cuestionario(models.Model):
     activo = models.BooleanField()
 
     def __unicode__(self):
-        return self.nombre
+        return '%s - %s' % (self.id,self.nombre)
 
 class GrupoCuestionario(models.Model):
     cuestionario = models.ForeignKey('Cuestionario')
@@ -37,6 +37,7 @@ class GrupoCuestionario(models.Model):
         return  '%s - %s' % (self.cuestionario, self.numero)
 
 class Pregunta(models.Model):
+    cuestionario = models.ForeignKey('Cuestionario')
     grupocuestionario = models.ForeignKey(GrupoCuestionario)
     tipopregunta = models.ForeignKey(TipoPregunta)
     validaciontexto = models.ManyToManyField(ValidacionTexto,blank=True,null=True)
@@ -45,7 +46,7 @@ class Pregunta(models.Model):
     activo = models.BooleanField()
 
     def __unicode__(self):
-        return self.nombre
+        return "%s - %s -%s" % (self.nombre,self.grupocuestionario,self.tipopregunta)
     
 class Opcion(models.Model):
     pregunta = models.ForeignKey('Pregunta')
@@ -70,7 +71,7 @@ class MatrizX(models.Model):
 
 class MatrizY(models.Model):
     pregunta = models.ForeignKey('Pregunta')
-    grupo_siguiente = models.ForeignKey('GrupoCuestionario')
+    grupo_siguiente = models.ForeignKey('GrupoCuestionario',blank=True,null=True)
     nombre = models.TextField(db_index=True)
     codigo = models.CharField(max_length=100,db_index=True)
     aleatorio = models.BooleanField()
@@ -85,7 +86,7 @@ class Proyecto(models.Model):
     activo = models.BooleanField()
 
     def __unicode__(self):
-        return '%s - %s' % (self.nombre, self.cuestionario)
+        return '%s - %s' % (self.id, self.nombre)
 
 class Completos(models.Model):
     cuestionario = models.ForeignKey('Cuestionario')

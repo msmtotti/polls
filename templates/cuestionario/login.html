@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+
+<center>
+<div class="hero-unit">
+        <h1>Inicio de sesion</h1>
+      </div>
+      
+      <div class="row">
+        <div class="span2">
+          &nbsp;
+        </div>
+        <div class="span8">
+
+
+            <p>{{ msg }}</p>
+<p></p>
+    {% if errors %}
+        <p class="error">Disculpa, el nombre de usuario o password no coinciden.</p>
+    {% endif %}
+    <form action='.' method='post'> {% csrf_token %}
+    <label for="username">Usuario:</label>
+    <input type="text" name="username" value="" id="username">
+    <label for="password">password:</label>
+    <input type="password" name="password" value="" id="password">
+<br/>
+    <button type="submit" class="btn btn-primary">
+              <i class=" icon-user icon-white"></i> login
+    </button>
+    </form>
+
+
+       </div>
+        
+
+      
+
+      </center>
+
+    </div> <!-- /container -->
+
+
+{% endblock %}
